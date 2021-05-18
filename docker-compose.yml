@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+    mysql:
+        image: mysql:latest
+        command: --default-authentication-plugin=mysql_native_password
+        restart: on-failure
+        volumes: ["mysql:/var/lib/mysql"]
+        ports: ["3306:3306"]
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+    php:
+        build:
+            context: ./docker/php
+        restart: on-failure
+        volumes: ["./:/var/www/notes"]
+        env_file: [.env]
+
+    node:
+        image: node:latest
+        user: node
+        working_dir: /var/www/notes
+        command: tail -F anything
+        restart: on-failure
+        volumes: ["./:/var/www/notes"]
+        env_file: [.env]
+
+    nginx:
+        build:
+            context: ./docker/nginx
+        restart: on-failure
+        volumes: ["./public:/var/www/notes/public"]
+        ports: ["80:80", "443:443"]
+        depends_on: [php]
+
+volumes:
+    mysql:
+        driver: local
+
+    redis:
+        driver: local
