@@ -1,1 +1,4 @@
-fos_rest: null
+fos_rest:
+    body_converter: true
+    zone:
+        - {path: ^/api/(?!doc/)}

@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\User\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
+#[UniqueEntity(fields: 'username')]
 class User implements UserInterface
 {
     /**
@@ -21,16 +24,21 @@ class User implements UserInterface
     private int $id;
 
     /**
-     * @ORM\Column(unique=true)
+     * @ORM\Column(length=30, unique=true)
      */
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 30)]
     private string $username;
 
     /**
-     * @ORM\Column(length=4096)
+     * @ORM\Column
      */
     private string $password;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 8, max: 4096)]
     private string $plainPassword;
+
     private Token $currentToken;
 
     public function __construct(string $username, string $plainPassword)
