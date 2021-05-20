@@ -6,6 +6,7 @@ fos_rest:
         view_response_listener: true
     exception:
         flatten_exception_format: rfc7807
+        serializer_error_renderer: true
     body_listener: true
     format_listener:
         rules:
