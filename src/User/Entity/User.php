@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users")
  */
 #[UniqueEntity(fields: 'username')]
-class User implements UserInterface
+class User implements UserInterface, \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -117,5 +117,17 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         unset($this->plainPassword);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'currentToken' => $this->currentToken,
+        ];
     }
 }

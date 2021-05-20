@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="tokens")
  */
-class Token
+class Token implements \JsonSerializable
 {
     private const TOKEN_SIZE = 64;
 
@@ -71,5 +71,16 @@ class Token
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'token' => $this->token,
+            'expiresAt' => $this->expiresAt,
+        ];
     }
 }
