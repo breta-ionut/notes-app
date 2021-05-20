@@ -1,0 +1,21 @@
+parameters:
+    app.user.token_availability: 1440 # One day.
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\User\:
+        resource: '../../src/User/*'
+        exclude: '../../src/User/{Entity,Model}'
+
+    App\User\Controller\:
+        resource: '../../src/User/Controller'
+        tags: [controller.service_arguments]
+
+    App\User\Token\TokenManager:
+        $tokenAvailability: '%app.user.token_availability%'
+
+    App\User\User\UserManager:
+        $userAuthenticator: '@security.authenticator.manager.api_login'

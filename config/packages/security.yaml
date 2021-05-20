@@ -1,15 +1,40 @@
 security:
+    enable_authenticator_manager: true
+
+    encoders:
+        App\User\Entity\User: auto
+
     providers:
-        users_in_memory: {memory: null}
+        login_user: {id: App\User\Security\UserProvider\LoginUserProvider}
+        token_user: {id: App\User\Security\UserProvider\TokenUserProvider}
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            anonymous: true
-            lazy: true
-            provider: users_in_memory
+        frontend:
+            pattern: ^/(?!api/)
+            security: false
+
+        api_doc:
+            pattern: ^/api/doc
+            security: false
+
+        api_login:
+            pattern: ^/api/user/login$
+            methods: POST
+            provider: login_user
+            stateless: true
+            custom_authenticators: [App\User\Security\Authenticator\LoginAuthenticator]
+
+        api:
+            pattern: ^/api/
+            provider: token_user
+            stateless: true
+            logout: {path: /api/user/logout}
+            custom_authenticators: [App\User\Security\Authenticator\TokenAuthenticator]
 
     access_control:
+        - {path: ^/api/user$, methods: POST, roles: IS_ANONYMOUS}
+        - {path: ^/api, roles: IS_AUTHENTICATED_FULLY}

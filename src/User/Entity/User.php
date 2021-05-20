@@ -8,15 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity
  * @ORM\Table(name="users")
  */
 class User implements UserInterface
 {
     /**
-     * @ORM\Id()
+     * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue
      */
     private int $id;
 
@@ -31,6 +31,13 @@ class User implements UserInterface
     private string $password;
 
     private string $plainPassword;
+    private Token $currentToken;
+
+    public function __construct(string $username, string $plainPassword)
+    {
+        $this->username = $username;
+        $this->plainPassword = $plainPassword;
+    }
 
     public function getId(): int
     {
@@ -43,16 +50,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return $this->username;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
     }
 
     public function getPassword(): string
@@ -75,12 +72,17 @@ class User implements UserInterface
         return $this->plainPassword;
     }
 
+    public function getCurrentToken(): Token
+    {
+        return $this->currentToken;
+    }
+
     /**
      * @return $this
      */
-    public function setPlainPassword(string $plainPassword): static
+    public function setCurrentToken(Token $currentToken): static
     {
-        $this->plainPassword = $plainPassword;
+        $this->currentToken = $currentToken;
 
         return $this;
     }

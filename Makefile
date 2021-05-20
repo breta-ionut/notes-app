@@ -35,4 +35,10 @@ clean-hard:
 # Backend commands.
 enter-back:
 		docker-compose exec php bash
+
+generate-migration:
+		docker-compose exec php bin/console d:m:diff
+
+migrate:
+		docker-compose exec php bin/console d:m:m
 # End of - Backend commands.
