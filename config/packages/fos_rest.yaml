@@ -1,4 +1,12 @@
 fos_rest:
     body_converter: true
     zone:
-        - {path: ^/api/(?!doc/)}
+        - {path: ^/api(?!/doc$)}
+    view:
+        view_response_listener: true
+    exception:
+        flatten_exception_format: rfc7807
+    body_listener: true
+    format_listener:
+        rules:
+            - {path: ^/api(?!/doc$), priorities: json, fallback_format: json}

@@ -1,0 +1,5 @@
+user:
+    resource: ../../src/User/Controller
+    type: annotation
+    prefix: /api/user
+    name_prefix: app_user_

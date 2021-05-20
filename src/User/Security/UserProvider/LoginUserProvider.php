@@ -14,7 +14,7 @@ class LoginUserProvider extends AbstractUserProvider
      */
     public function loadUserByUsername(string $username): User
     {
-        $user = $this->userRepository->findOneBy(['email' => $username]);
+        $user = $this->userRepository->findOneBy(['username' => $username]);
         if (null === $user) {
             throw new UsernameNotFoundException(\sprintf('No user with email "%s" found.', $username));
         }
