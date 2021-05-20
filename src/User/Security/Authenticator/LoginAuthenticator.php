@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\User\Security\Authenticator;
 
+use App\Api\Exception\BadInputException;
+use App\Api\Exception\ValidationException;
 use App\User\Entity\User;
 use App\User\Model\Credentials;
 use App\User\Token\TokenManager;
@@ -16,6 +18,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -70,16 +73,26 @@ class LoginAuthenticator extends AbstractAuthenticator
         // TODO: handle authentication failure.
     }
 
+    /**
+     * @throws BadInputException
+     */
     private function readCredentials(Request $request): Credentials
     {
-        return $this->denormalizer->denormalize($request->request->all(), Credentials::class);
+        try {
+            return $this->denormalizer->denormalize($request->request->all(), Credentials::class);
+        } catch (ExceptionInterface $exception) {
+            throw new BadInputException(0, $exception);
+        }
     }
 
+    /**
+     * @throws ValidationException
+     */
     private function validateCredentials(Credentials $credentials): void
     {
         $violations = $this->validator->validate($credentials);
-        if (\count($violations)) {
-            // TODO: handle validation failure.
+        if (0 !== \count($violations)) {
+            throw new ValidationException($violations);
         }
     }
 }
