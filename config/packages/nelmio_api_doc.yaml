@@ -4,6 +4,7 @@ nelmio_api_doc:
             title: Notes
             description: A React + Symfony sample application for managing one's notes.
             version: 0.0.1
+            license: {name: MIT}
 
         paths:
             /api/user/login:
@@ -18,9 +19,7 @@ nelmio_api_doc:
                                 schema:
                                     type: object
                                     properties:
-                                        username:
-                                            type: string
-                                            format: email
+                                        username: {type: string}
                                         password:
                                             type: string
                                             format: password
