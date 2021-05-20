@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\User\Security\Authenticator;
 
-use App\Api\Exception\BadInputException;
 use App\Api\Exception\ValidationException;
 use App\User\Entity\User;
 use App\User\Exception\AuthenticationFailedException;
@@ -19,7 +18,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -74,16 +72,9 @@ class LoginAuthenticator extends AbstractAuthenticator
         throw new AuthenticationFailedException();
     }
 
-    /**
-     * @throws BadInputException
-     */
     private function readCredentials(Request $request): Credentials
     {
-        try {
-            return $this->denormalizer->denormalize($request->request->all(), Credentials::class);
-        } catch (ExceptionInterface $exception) {
-            throw new BadInputException(0, $exception);
-        }
+        return $this->denormalizer->denormalize($request->request->all(), Credentials::class);
     }
 
     /**
