@@ -7,6 +7,7 @@ namespace App\User\Security\Authenticator;
 use App\Api\Exception\BadInputException;
 use App\Api\Exception\ValidationException;
 use App\User\Entity\User;
+use App\User\Exception\AuthenticationFailedException;
 use App\User\Model\Credentials;
 use App\User\Token\TokenManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,7 +71,7 @@ class LoginAuthenticator extends AbstractAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        // TODO: handle authentication failure.
+        throw new AuthenticationFailedException();
     }
 
     /**
