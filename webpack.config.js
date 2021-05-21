@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const dotenv = require('dotenv')
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -20,6 +21,15 @@ Encore.setOutputPath('public/build/')
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
-    .enableVueLoader();
+    .configureDefinePlugin(options => {
+        const env = dotenv.config()
+
+        if (env.error) {
+            throw env.error
+        }
+
+        options['process.env'].API_BASE_URL = JSON.stringify(env.parsed.API_BASE_URL)
+    })
+    .enableVueLoader(() => {}, {runtimeCompilerBuild: false});
 
 module.exports = Encore.getWebpackConfig();

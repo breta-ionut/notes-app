@@ -13,7 +13,7 @@ class BadInputException extends \RuntimeException implements HttpExceptionInterf
 
     public function __construct(int $code = 0, \Throwable $previous = null)
     {
-        parent::__construct('Bad input.', $code, $previous);
+        parent::__construct('BAD_INPUT', $code, $previous);
     }
 
     /**

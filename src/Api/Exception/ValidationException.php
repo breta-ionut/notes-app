@@ -17,7 +17,7 @@ class ValidationException extends \RuntimeException implements HttpExceptionInte
         int $code = 0,
         \Throwable $previous = null,
     ) {
-        parent::__construct('Validation errors.', $code, $previous);
+        parent::__construct('VALIDATION_ERRORS', $code, $previous);
     }
 
     public function getConstraintViolationList(): ConstraintViolationListInterface

@@ -14,7 +14,7 @@ class AuthenticationFailedException extends \RuntimeException implements HttpExc
 
     public function __construct(int $code = 0, \Throwable $previous = null)
     {
-        parent::__construct('Authentication failed.', $code, $previous);
+        parent::__construct('AUTHENTICATION_FAILED', $code, $previous);
     }
 
     /**

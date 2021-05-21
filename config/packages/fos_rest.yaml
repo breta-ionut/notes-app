@@ -8,6 +8,7 @@ fos_rest:
         flatten_exception_format: rfc7807
         serializer_error_renderer: true
         messages:
+            App\Api\Exception\ValidationException: true
             App\User\Exception\AuthenticationFailedException: true
     body_listener: true
     format_listener:

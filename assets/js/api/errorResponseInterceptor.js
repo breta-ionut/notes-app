@@ -13,7 +13,7 @@ export default error => {
     data = error.response.data
 
     switch (true) {
-        case data.violations:
+        case errorTitles.VALIDATION_ERRORS === data.title:
             throw ApiValidationError.fromApiResponseData(data, error)
 
         case 401 === data.status && errorTitles.AUTHENTICATION_FAILED !== data.title:

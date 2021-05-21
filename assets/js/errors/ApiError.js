@@ -29,7 +29,7 @@ export default class ApiError extends Error {
         super(title)
 
         this.#title = title
-        this.#code = status
+        this.#status = status
         this.#detail = detail
         this.#original = original
     }
