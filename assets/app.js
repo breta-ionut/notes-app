@@ -8,7 +8,7 @@ import {createApp} from 'vue'
 import VueAxios from 'vue-axios'
 import VueClickAwayPlugin from 'vue3-click-away'
 
-import './styles/app.css'
+import './css/app.css'
 
 import axios from './js/axios.js'
 import App from './js/pages/App.vue'
