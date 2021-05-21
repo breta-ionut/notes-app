@@ -8,9 +8,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="username" class="form-label">Email</label>
+                <label for="username" class="form-label">Username</label>
 
-                <input type="text" name="username" id="username" class="form-control" :class="{'border-danger': errors.fields.username}" placeholder="john.doe@example.com" required v-model="username" />
+                <input type="text" name="username" id="username" class="form-control" :class="{'border-danger': errors.fields.username}" placeholder="john.doe" required v-model="username" />
 
                 <p class="form-text text-danger" v-for="error in errors.fields.username">{{ error }}</p>
             </div>

@@ -1,6 +1,6 @@
 {
     "name": "ionutbreta/notes",
-    "description": "A React + Symfony sample application for managing one's notes.",
+    "description": "A Vue + Symfony sample application for managing one's notes.",
     "type": "project",
     "license": "MIT",
     "authors": [

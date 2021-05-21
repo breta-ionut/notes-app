@@ -6,7 +6,6 @@ import 'regenerator-runtime/runtime'
 
 import {createApp} from 'vue'
 import VueAxios from 'vue-axios'
-import VueClickAwayPlugin from 'vue3-click-away'
 
 import './css/app.css'
 
@@ -19,5 +18,4 @@ createApp(App)
     .use(router)
     .use(VueAxios, axios)
     .use(store)
-    .use(VueClickAwayPlugin)
     .mount('#app')

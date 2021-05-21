@@ -2,22 +2,8 @@
     "name": "ionutbreta-notes",
     "description": "A Vue + Symfony sample application for managing one's notes.",
     "author": "Ionut Breta <breta.ionut@gmail.com>",
-    "devDependencies": {
-        "@symfony/webpack-encore": "^1.0.0",
-        "@vue/compiler-sfc": "^3.0.11",
-        "core-js": "^3.0.0",
-        "regenerator-runtime": "^0.13.2",
-        "vue-loader": "^16.1.0",
-        "webpack-notifier": "^1.6.0"
-    },
     "license": "MIT",
     "private": true,
-    "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
-    },
     "dependencies": {
         "@popperjs/core": "^2.9.2",
         "axios": "^0.21.1",
@@ -27,7 +13,20 @@
         "vue": "^3.0.11",
         "vue-axios": "^3.2.4",
         "vue-router": "^4.0.8",
-        "vue3-click-away": "^1.2.1",
         "vuex": "^4.0.0"
+    },
+    "devDependencies": {
+        "@symfony/webpack-encore": "^1.0.0",
+        "@vue/compiler-sfc": "^3.0.11",
+        "core-js": "^3.0.0",
+        "regenerator-runtime": "^0.13.2",
+        "vue-loader": "^16.1.0",
+        "webpack-notifier": "^1.6.0"
+    },
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
     }
 }
