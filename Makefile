@@ -23,7 +23,9 @@ reload-env-vars: configure-env-vars
 init: configure-env-vars
 		make start
 		docker-compose exec php composer install
-		docker-compose exec node npm install
+		docker-compose exec node yarn install
+		make migrate
+		make build-front
 
 clean:
 		docker system prune -f
@@ -41,4 +43,15 @@ generate-migration:
 
 migrate:
 		docker-compose exec php bin/console d:m:m
+
+user-register:
+		docker-compose exec php bin/console app:user:register $(filter-out $@,$(MAKECMDGOALS))
 # End of - Backend commands.
+
+# Frontend commands.
+enter-front:
+		docker-compose exec node bash
+
+build-front:
+		docker-compose exec node npm run build
+# End of - Frontend commands.
