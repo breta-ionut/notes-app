@@ -1,4 +1,4 @@
-import errorTitles from '../api/errorTitles.js'
+import errorDetails from '../api/errorDetails.js'
 import ApiError from '../errors/ApiError.js'
 import ApiValidationError from '../errors/ApiValidationError.js'
 import Credentials from '../models/Credentials.js'
@@ -47,7 +47,7 @@ export default {
             if (error instanceof ApiValidationError) {
                 this.errors.global.concat(error.getGlobalViolationTitles())
                 Object.assign(this.errors.fields, error.getFieldsViolationTitles())
-            } else if (error.getTitle() === errorTitles.AUTHENTICATION_FAILED) {
+            } else if (error.getDetail() === errorDetails.AUTHENTICATION_FAILED) {
                 this.errors.global.push('Invalid credentials.')
             } else {
                 this.errors.global.push('Unknown error occurred. Please try again.')

@@ -31,7 +31,7 @@ class ValidationExceptionNormalizer implements ContextAwareNormalizerInterface, 
             $context,
         );
 
-        return ['detail' => $violationsData['detail'], 'violations' => $violationsData['violations']] + $data;
+        return $data + ['violations' => $violationsData['violations']];
     }
 
     /**
