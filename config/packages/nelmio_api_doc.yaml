@@ -23,6 +23,73 @@ nelmio_api_doc:
                                         password:
                                             type: string
                                             format: password
+                    responses:
+                        '200':
+                            description: 'If the user successfully logged in.'
+                            content:
+                                application/json:
+                                    schema: {$ref: '#/components/schemas/UserResponse'}
+                        '400':
+                            description: 'If the data sent for login is malformed (e.g. bad JSON) or invalid (e.g. username is blank).'
+                            content:
+                                application/json:
+                                    schema: {$ref: '#/components/schemas/ValidationErrorResponse'}
+                        '401':
+                            description: 'If the login was unsuccessful.'
+                            content:
+                                application/json:
+                                    schema: {$ref: '#/components/schemas/ErrorResponse'}
+                        '500': {$ref: '#/components/responses/InternalServerError'}
+
+        components:
+            responses:
+                InternalServerError:
+                    description: 'If an internal error occurred.'
+                    content:
+                        application/json:
+                            schema: {$ref: '#/components/schemas/ErrorResponse'}
+
+            schemas:
+                UserResponse:
+                    type: object
+                    properties:
+                        id: {type: integer}
+                        username: {type: string}
+                        currentToken:
+                            type: object
+                            properties:
+                                token: {type: string}
+                                expiresAt:
+                                    type: string
+                                    format: date-time
+
+                ErrorResponse:
+                    type: object
+                    properties:
+                        type: {type: string}
+                        title: {type: string}
+                        status: {type: integer}
+                        detail: {type: string}
+
+                ValidationErrorResponse:
+                    type: object
+                    properties:
+                        type: {type: string}
+                        title: {type: string}
+                        status: {type: integer}
+                        detail: {type: string}
+                        violations:
+                            type: array
+                            items:
+                                type: object
+                                properties:
+                                    propertyPath: {type: string}
+                                    title: {type: string}
+                                    parameters:
+                                        type: array
+                                        items: {type: string}
+                                    type: {type: string}
+                                    payload: {type: object}
 
     areas:
         path_patterns:
