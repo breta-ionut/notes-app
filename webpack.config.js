@@ -19,6 +19,7 @@ Encore.setOutputPath('public/build/')
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
         config.corejs = 3;
-    });
+    })
+    .enableVueLoader();
 
 module.exports = Encore.getWebpackConfig();
