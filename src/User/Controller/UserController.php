@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractFOSRestController
 {
+    #[Route(path: '', name: 'get', methods: ['GET'])]
     public function getUserAction(UserInterface $user): View
     {
         return $this->view($user);
@@ -20,5 +21,14 @@ class UserController extends AbstractFOSRestController
     public function login(UserInterface $user): View
     {
         return $this->view($user);
+    }
+
+    /**
+     * @throws \BadMethodCallException
+     */
+    #[Route(path: '/logout', name: 'logout', methods: ['DELETE'])]
+    public function logout(): void
+    {
+        throw new \BadMethodCallException('This controller should not get executed.');
     }
 }

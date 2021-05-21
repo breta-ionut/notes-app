@@ -6,7 +6,24 @@ nelmio_api_doc:
             version: 0.0.1
             license: {name: MIT}
 
+        security:
+            - TokenAuth: []
+
         paths:
+            /api/user:
+                get:
+                    summary: Get current user
+                    description: 'Gets the data of the currently logged in user.'
+                    tags: [User]
+                    responses:
+                        '200':
+                            description: 'If the data of the current user is successfully returned.'
+                            content:
+                                application/json:
+                                    schema: {$ref: '#/components/schemas/UserResponse'}
+                        '401': {$ref: '#/components/responses/Unauthorized'}
+                        '500': {$ref: '#/components/responses/InternalServerError'}
+
             /api/user/login:
                 post:
                     summary: Login
@@ -41,8 +58,30 @@ nelmio_api_doc:
                                     schema: {$ref: '#/components/schemas/ErrorResponse'}
                         '500': {$ref: '#/components/responses/InternalServerError'}
 
+            /api/user/logout:
+                delete:
+                    summary: Logout
+                    description: 'Logs out the current user.'
+                    tags: [User]
+                    responses:
+                        '204':
+                            description: 'If the current user was successfully logged out.'
+                        '500': {$ref: '#/components/responses/InternalServerError'}
+
         components:
+            securitySchemes:
+                TokenAuth:
+                    type: apiKey
+                    in: header
+                    name: Authorization
+
             responses:
+                Unauthorized:
+                    description: 'If the request is anonymous.'
+                    content:
+                        application/json:
+                            schema: {$ref: '#/components/schemas/ErrorResponse'}
+
                 InternalServerError:
                     description: 'If an internal error occurred.'
                     content:
