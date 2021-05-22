@@ -7,6 +7,7 @@ namespace App\Note\Controller;
 use App\Api\Exception\ValidationException;
 use App\Note\Entity\Note;
 use App\Note\Repository\NoteRepository;
+use App\User\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
@@ -27,11 +28,15 @@ class NoteController extends AbstractFOSRestController
     public function create(
         Note $note,
         ConstraintViolationListInterface $validationErrors,
+        UserInterface $user,
         EntityManagerInterface $entityManager,
     ): View {
         if (0 !== \count($validationErrors)) {
             throw new ValidationException($validationErrors);
         }
+
+        /** @var User $user */
+        $note->setUser($user);
 
         $entityManager->persist($note);
         $entityManager->flush();

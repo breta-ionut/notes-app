@@ -41,11 +41,10 @@ class Note implements \JsonSerializable
      */
     private User $user;
 
-    public function __construct(string $name, string $content, User $user)
+    public function __construct(string $name, string $content)
     {
         $this->name = $name;
         $this->content = $content;
-        $this->user = $user;
     }
 
     public function getId(): int
@@ -66,6 +65,16 @@ class Note implements \JsonSerializable
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
