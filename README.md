@@ -10,7 +10,7 @@ A Vue + Symfony sample application for managing one's notes.
 ## Installation
 
 1. Run `make init`
-2. Add `127.0.0.1 notes.local` to your hosts file (`etc/hosts` on Ubuntu or other UNIX-based OS)
+2. Add `127.0.0.1 notes.local` to your hosts file (`/etc/hosts` on Ubuntu or other UNIX-based OS)
 
 ## Usage
 
