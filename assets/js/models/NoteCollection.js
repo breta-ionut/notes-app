@@ -17,7 +17,7 @@ export default class NoteCollection {
         let instance = new this(), i, l, note
 
         for (i = 0, l = data.length; i < l; i++) {
-            note = Note.fromApiResponseData(data)
+            note = Note.fromApiResponseData(data[i])
 
             instance.notes[note.getId()] = note
         }
