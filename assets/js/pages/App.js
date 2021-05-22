@@ -1,7 +1,8 @@
 import {mapState} from 'vuex'
 
 export default {
-    computed: mapState('user', {
-        userLoading: state => !state.userLoaded,
-    }),
+    computed: {
+        ...mapState(['activeModal']),
+        ...mapState('user', {userLoading: state => !state.userLoaded}),
+    },
 }

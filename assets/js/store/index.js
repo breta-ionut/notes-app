@@ -8,4 +8,17 @@ export default createStore({
         note,
         user,
     },
+
+    state: () => ({
+        /**
+         * @type {boolean}
+         */
+        activeModal: false,
+    }),
+
+    mutations: {
+        activateModal: state => state.activeModal = true,
+
+        deactivateModal: state => state.activeModal = false,
+    },
 })
