@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Note\Repository\NoteRepository")
  * @ORM\Table(name="notes")
  */
 class Note implements \JsonSerializable

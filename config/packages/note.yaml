@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Note\:
+        resource: '../../src/Note/*'
+        exclude: '../../src/Note/{Entity}'
+
+    App\Note\Controller\:
+        resource: '../../src/Note/Controller'
+        tags: [controller.service_arguments]
