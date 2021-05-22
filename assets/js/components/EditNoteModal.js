@@ -16,9 +16,14 @@ export default {
         errors: noErrors(),
     }),
 
+    created() {
+        this.$store.commit('activateModal')
+    },
+
     methods: {
         close() {
             this.$emit('close')
+            this.$store.commit('deactivateModal')
         },
 
         async save() {
