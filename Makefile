@@ -14,14 +14,7 @@ restart: stop
 restart-rebuild: stop
 		make start-rebuild
 
-configure-env-vars:
-		cp -f .env.dist .env
-
-reload-env-vars: configure-env-vars
-		make restart
-
-init: configure-env-vars
-		make start
+init: start
 		docker-compose exec php composer install
 		docker-compose exec node yarn install
 		make migrate
