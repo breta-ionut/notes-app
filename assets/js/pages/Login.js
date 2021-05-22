@@ -39,6 +39,11 @@ export default {
             this.errors = noErrors()
         },
 
+        /**
+         * @param {Error} error
+         *
+         * @throws {Error}
+         */
         handleApiError(error) {
             if (!(error instanceof ApiError)) {
                 throw error

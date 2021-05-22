@@ -20,5 +20,7 @@
         </table>
     </div>
 
-    <NoteModal />
+    <slot v-if="currentNote">
+        <NoteModal :note="currentNote" />
+    </slot>
 </template>

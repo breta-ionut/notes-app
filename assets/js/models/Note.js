@@ -11,14 +11,14 @@ export default class Note {
      *
      * @private
      */
-    name
+    name = ''
 
     /**
      * @type {string}
      *
      * @private
      */
-    content
+    content = ''
 
     /**
      * @returns {Note}
