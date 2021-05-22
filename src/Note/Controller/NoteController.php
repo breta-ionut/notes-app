@@ -22,7 +22,7 @@ class NoteController extends AbstractFOSRestController
     /**
      * @throws ValidationException
      */
-    #[Route(path: '', name: 'create', methods: ['POST'])]
+    #[Route(path: '/', name: 'create', methods: ['POST'])]
     #[ParamConverter('note', converter: 'fos_rest.request_body')]
     public function create(
         Note $note,
@@ -42,7 +42,7 @@ class NoteController extends AbstractFOSRestController
     /**
      * @throws ValidationException
      */
-    #[Route(path: '{id<\d+>}', name: 'update', methods: ['PUT'])]
+    #[Route(path: '/{id<\d+>}', name: 'update', methods: ['PUT'])]
     #[ParamConverter('newNote', converter: 'fos_rest.request_body')]
     #[IsGranted('NOTE_ACCESS', subject: 'note')]
     public function update(
@@ -62,7 +62,7 @@ class NoteController extends AbstractFOSRestController
         return $this->view($note);
     }
 
-    #[Route(path: '{id<\d+>}', name: 'delete', methods: ['DELETE'])]
+    #[Route(path: '/{id<\d+>}', name: 'delete', methods: ['DELETE'])]
     #[IsGranted('NOTE_ACCESS', subject: 'note')]
     public function delete(Note $note, EntityManagerInterface $entityManager): View
     {
@@ -72,7 +72,7 @@ class NoteController extends AbstractFOSRestController
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 
-    #[Route(path: '', name: 'list', methods: ['GET'])]
+    #[Route(path: '/', name: 'list', methods: ['GET'])]
     public function list(UserInterface $user, NoteRepository $noteRepository): View
     {
         $notes = $noteRepository->findBy(['user' => $user]);

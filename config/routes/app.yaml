@@ -4,6 +4,12 @@ frontend:
     prefix: /
     name_prefix: app_frontend_
 
+note:
+    resource: ../../src/Note/Controller
+    type: annotation
+    prefix: /api/note
+    name_prefix: app_note_
+
 user:
     resource: ../../src/User/Controller
     type: annotation
