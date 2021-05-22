@@ -11,19 +11,10 @@ export default {
 
     data: () => ({
         /**
-         * @type {Note}
-         */
-        dirtyNote: null,
-
-        /**
          * @type {Object}
          */
         errors: noErrors(),
     }),
-
-    created() {
-        this.dirtyNote = this.note.isNew() ? this.note : this.note.clone()
-    },
 
     methods: {
         close() {
@@ -34,9 +25,9 @@ export default {
             this.resetErrors()
 
             try {
-                let action = this.dirtyNote.isNew() ? 'note/create' : 'note/update'
+                let action = this.note.isNew() ? 'note/create' : 'note/update'
 
-                await this.$store.dispatch(action, this.dirtyNote)
+                await this.$store.dispatch(action, this.note)
 
                 this.close()
             } catch (error) {
