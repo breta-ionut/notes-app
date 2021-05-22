@@ -23,18 +23,6 @@ export default class Note {
     /**
      * @returns {Note}
      */
-    static fromViewData({name, content}) {
-        let instance = new this()
-
-        instance.name = name
-        instance.content = content
-
-        return instance
-    }
-
-    /**
-     * @returns {Note}
-     */
     static fromApiResponseData({id, name, content}) {
         let instance = new this()
 
@@ -71,6 +59,19 @@ export default class Note {
      */
     getContent() {
         return this.content
+    }
+
+    /**
+     * @return {Note}
+     */
+    clone() {
+        let instance = new this.constructor()
+
+        instance.id = this.id
+        instance.name = this.name
+        instance.content = this.content
+
+        return instance
     }
 
     /**

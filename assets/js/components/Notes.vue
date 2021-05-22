@@ -19,4 +19,6 @@
             </tbody>
         </table>
     </div>
+
+    <NoteModal />
 </template>
