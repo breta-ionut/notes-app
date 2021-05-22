@@ -13,8 +13,8 @@
 
             <tbody v-for="note in notes">
                 <tr>
-                    <td>{{ note.getName() }}</td>
-                    <td>{{ note.getContent() }}</td>
+                    <td>{{ truncate(note.getName(), 25) }}</td>
+                    <td>{{ truncate(note.getContent(), 50) }}</td>
                     <td>
                         <button class="btn btn-sm btn-primary" @click="edit(note)">Edit</button>
                         <button class="btn btn-sm btn-danger" @click="remove(note)">Delete</button>

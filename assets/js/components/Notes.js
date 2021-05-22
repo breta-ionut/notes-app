@@ -23,6 +23,16 @@ export default {
     },
 
     methods: {
+        /**
+         * @param {string} string
+         * @param {number} length
+         *
+         * @return {string}
+         */
+        truncate(string, length) {
+            return string.length > length ? string.substring(0, length) + '...' : string
+        },
+
         add() {
             this.currentNote = new Note()
         },
