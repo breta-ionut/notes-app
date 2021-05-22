@@ -2,7 +2,7 @@
 
 <template>
     <div class="container mt-xxl-5" v-if="areNotesLoaded">
-        <table class="table">
+        <table class="table" v-if="notes.length">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
@@ -22,6 +22,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="alert alert-primary" v-if="!notes.length">
+            You don't have any notes added.
+        </div>
 
         <slot v-if="currentNote">
             <NoteModal :note="currentNote" @close="reset" />
