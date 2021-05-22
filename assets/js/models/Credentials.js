@@ -1,22 +1,26 @@
 export default class Credentials {
     /**
      * @type {string}
+     *
+     * @private
      */
-    #username
+    username
 
     /**
      * @type {string}
+     *
+     * @private
      */
-    #password
+    password
 
     /**
      * @returns {Credentials}
      */
     static fromViewData({username, password}) {
-        const instance = new Credentials()
+        const instance = new this()
 
-        instance.#username = username
-        instance.#password = password
+        instance.username = username
+        instance.password = password
 
         return instance
     }
@@ -25,6 +29,6 @@ export default class Credentials {
      * @returns {Object}
      */
     toJSON() {
-        return {username: this.#username, password: this.#password}
+        return {username: this.username, password: this.password}
     }
 }

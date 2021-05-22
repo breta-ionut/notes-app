@@ -1,22 +1,26 @@
 export default class Token {
     /**
      * @type {string}
+     *
+     * @private
      */
-    #token
+    token
 
     /**
      * @type {Date}
+     *
+     * @private
      */
-    #expiresAt
+    expiresAt
 
     /**
      * @returns {Token}
      */
     static fromApiResponseData({token, expiresAt}) {
-        let instance = new Token()
+        let instance = new this()
 
-        instance.#token = token
-        instance.#expiresAt = new Date(expiresAt)
+        instance.token = token
+        instance.expiresAt = new Date(expiresAt)
 
         return instance
     }
@@ -25,13 +29,13 @@ export default class Token {
      * @returns {string}
      */
     getToken() {
-        return this.#token
+        return this.token
     }
 
     /**
      * @returns {Date}
      */
     getExpiresAt() {
-        return this.#expiresAt
+        return this.expiresAt
     }
 }

@@ -4,8 +4,10 @@ import ConstraintViolation from '../models/ConstraintViolation.js'
 export default class ApiValidationError extends ApiError {
     /**
      * @type {ConstraintViolation[]}
+     *
+     * @private
      */
-    #violations = []
+    violations = []
 
     /**
      * @returns {ApiValidationError}
@@ -13,7 +15,7 @@ export default class ApiValidationError extends ApiError {
     static fromApiResponseData({violations, ...data}, original) {
         let instance = super.fromApiResponseData(data)
 
-        instance.#violations = violations.map(violationData => ConstraintViolation.fromApiResponseData(violationData))
+        instance.violations = violations.map(violationData => ConstraintViolation.fromApiResponseData(violationData))
 
         return instance
     }
@@ -22,14 +24,14 @@ export default class ApiValidationError extends ApiError {
      * @returns {ConstraintViolation[]}
      */
     getViolations() {
-        return this.#violations
+        return this.violations
     }
 
     /**
      * @returns {string[]}
      */
     getGlobalViolationTitles() {
-        return this.#violations
+        return this.violations
             .filter(violation => !violation.hasPropertyPath())
             .map(violation => violation.getTitle())
     }
@@ -40,7 +42,7 @@ export default class ApiValidationError extends ApiError {
     getFieldsViolationTitles() {
         const violationTitles = {}
 
-        this.#violations.forEach(violation => {
+        this.violations.forEach(violation => {
             let propertyPath
 
             if (!violation.hasPropertyPath()) {

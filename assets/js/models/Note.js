@@ -1,27 +1,33 @@
 export default class Note {
     /**
      * @type {number}
+     *
+     * @private
      */
-    #id
+    id
 
     /**
      * @type {string}
+     *
+     * @private
      */
-    #name
+    name
 
     /**
      * @type {string}
+     *
+     * @private
      */
-    #content
+    content
 
     /**
      * @returns {Note}
      */
     static fromViewData({name, content}) {
-        let instance = new Note()
+        let instance = new this()
 
-        instance.#name = name
-        instance.#content = content
+        instance.name = name
+        instance.content = content
 
         return instance
     }
@@ -30,11 +36,11 @@ export default class Note {
      * @returns {Note}
      */
     static fromApiResponseData({id, name, content}) {
-        let instance = new Note()
+        let instance = new this()
 
-        instance.#id = id
-        instance.#name = name
-        instance.#content = content
+        instance.id = id
+        instance.name = name
+        instance.content = content
 
         return instance
     }
@@ -43,34 +49,34 @@ export default class Note {
      * @returns {number}
      */
     getId() {
-        return this.#id
+        return this.id
     }
 
     /**
      * @returns {boolean}
      */
     isNew() {
-        return !this.#id
+        return !this.id
     }
 
     /**
      * @returns {string}
      */
     getName() {
-        return this.#name
+        return this.name
     }
 
     /**
      * @returns {string}
      */
     getContent() {
-        return this.#content
+        return this.content
     }
 
     /**
      * @returns {Object}
      */
     toJSON() {
-        return {name: this.#name, content: this.#content}
+        return {name: this.name, content: this.content}
     }
 }

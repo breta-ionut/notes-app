@@ -3,28 +3,34 @@ import Token from './Token.js'
 export default class User {
     /**
      * @type {number}
+     *
+     * @private
      */
-    #id
+    id
 
     /**
      * @type {string}
+     *
+     * @private
      */
-    #username
+    username
 
     /**
      * @type {Token}
+     *
+     * @private
      */
-    #currentToken
+    currentToken
 
     /**
      * @returns {User}
      */
     static fromApiResponseData({id, username, currentToken}) {
-        let instance = new User()
+        let instance = new this()
 
-        instance.#id = id
-        instance.#username = username
-        instance.#currentToken = Token.fromApiResponseData(currentToken)
+        instance.id = id
+        instance.username = username
+        instance.currentToken = Token.fromApiResponseData(currentToken)
 
         return instance
     }
@@ -33,20 +39,20 @@ export default class User {
      * @returns {number}
      */
     getId() {
-        return this.#id
+        return this.id
     }
 
     /**
      * @returns {string}
      */
     getUsername() {
-        return this.#username
+        return this.username
     }
 
     /**
      * @returns {Token}
      */
     getCurrentToken() {
-        return this.#currentToken
+        return this.currentToken
     }
 }

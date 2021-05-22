@@ -1,23 +1,31 @@
 export default class ApiError extends Error {
     /**
      * @type {string}
+     *
+     * @private
      */
-    #title
+    title
 
     /**
      * @type {number}
+     *
+     * @private
      */
-    #status
+    status
 
     /**
      * @type {string|null}
+     *
+     * @private
      */
-    #detail
+    detail
 
     /**
      * @type {Object}
+     *
+     * @private
      */
-    #original
+    original
 
     /**
      * @param {string} title
@@ -28,10 +36,10 @@ export default class ApiError extends Error {
     constructor(title, status, detail, original) {
         super(title)
 
-        this.#title = title
-        this.#status = status
-        this.#detail = detail
-        this.#original = original
+        this.title = title
+        this.status = status
+        this.detail = detail
+        this.original = original
     }
 
     /**
@@ -45,27 +53,27 @@ export default class ApiError extends Error {
      * @returns {string}
      */
     getTitle() {
-        return this.#title
+        return this.title
     }
 
     /**
      * @returns {number}
      */
     getStatus() {
-        return this.#status
+        return this.status
     }
 
     /**
      * @returns {string|null}
      */
     getDetail() {
-        return this.#detail
+        return this.detail
     }
 
     /**
      * @returns {Object}
      */
     getOriginal() {
-        return this.#original
+        return this.original
     }
 }
