@@ -10,19 +10,95 @@ nelmio_api_doc:
             - TokenAuth: []
 
         paths:
+            /api/note:
+                post:
+                    summary: Create note
+                    description: 'Creates note for currently logged in user.'
+                    tags: [Note]
+                    requestBody:
+                        required: true
+                        content:
+                            application/json:
+                                schema: {$ref: '#/components/schemas/NoteRequest'}
+                    responses:
+                        201:
+                            description: 'If the note was successfully created.'
+                            content:
+                                application/json:
+                                    schema: {$ref: '#/components/schemas/NoteResponse'}
+                        401: {$ref: '#/components/responses/Unauthorized'}
+                        500: {$ref: '#/components/responses/InternalServerError'}
+
+                get:
+                    summary: List notes
+                    description: 'Lists all notes of the currently logged in user.'
+                    tags: [Note]
+                    responses:
+                        200:
+                            description: 'If the notes were successfully retrieved.'
+                            content:
+                                application/json:
+                                    schema:
+                                        type: array
+                                        items: {$ref: '#/components/schemas/NoteResponse'}
+                        401: {$ref: '#/components/responses/Unauthorized'}
+                        500: {$ref: '#/components/responses/InternalServerError'}
+
+            /api/note/{id}:
+                put:
+                    summary: Update note
+                    description: 'Updates the note with the given id.'
+                    tags: [Note]
+                    parameters:
+                        - in: path
+                          name: id
+                          schema: {type: integer}
+                          required: true
+                          description: 'The id of the note to be updated.'
+                    requestBody:
+                        required: true
+                        content:
+                            application/json:
+                                schema: {$ref: '#/components/schemas/NoteRequest'}
+                    responses:
+                        200:
+                            description: 'If the note was successfully updated.'
+                            content:
+                                application/json:
+                                    schema: {$ref: '#/components/schemas/NoteResponse'}
+                        401: {$ref: '#/components/responses/Unauthorized'}
+                        403: {$ref: '#/components/responses/Forbidden'}
+                        500: {$ref: '#/components/responses/InternalServerError'}
+
+                delete:
+                    summary: Delete note
+                    description: 'Deletes the note with the given id.'
+                    tags: [Note]
+                    parameters:
+                        -   in: path
+                            name: id
+                            schema: {type: integer}
+                            required: true
+                            description: 'The id of the note to be deleted.'
+                    responses:
+                        204: {description: 'If the note was successfully deleted.'}
+                        401: {$ref: '#/components/responses/Unauthorized'}
+                        403: {$ref: '#/components/responses/Forbidden'}
+                        500: {$ref: '#/components/responses/InternalServerError'}
+
             /api/user:
                 get:
                     summary: Get current user
                     description: 'Gets the data of the currently logged in user.'
                     tags: [User]
                     responses:
-                        '200':
+                        200:
                             description: 'If the data of the current user is successfully returned.'
                             content:
                                 application/json:
                                     schema: {$ref: '#/components/schemas/UserResponse'}
-                        '401': {$ref: '#/components/responses/Unauthorized'}
-                        '500': {$ref: '#/components/responses/InternalServerError'}
+                        401: {$ref: '#/components/responses/Unauthorized'}
+                        500: {$ref: '#/components/responses/InternalServerError'}
 
             /api/user/login:
                 post:
@@ -41,22 +117,22 @@ nelmio_api_doc:
                                             type: string
                                             format: password
                     responses:
-                        '200':
+                        200:
                             description: 'If the user successfully logged in.'
                             content:
                                 application/json:
                                     schema: {$ref: '#/components/schemas/UserResponse'}
-                        '400':
+                        400:
                             description: 'If the data sent for login is malformed (e.g. bad JSON) or invalid (e.g. username is blank).'
                             content:
                                 application/json:
                                     schema: {$ref: '#/components/schemas/ValidationErrorResponse'}
-                        '401':
+                        401:
                             description: 'If the login was unsuccessful.'
                             content:
                                 application/json:
                                     schema: {$ref: '#/components/schemas/ErrorResponse'}
-                        '500': {$ref: '#/components/responses/InternalServerError'}
+                        500: {$ref: '#/components/responses/InternalServerError'}
 
             /api/user/logout:
                 delete:
@@ -64,9 +140,9 @@ nelmio_api_doc:
                     description: 'Logs out the current user.'
                     tags: [User]
                     responses:
-                        '204':
+                        204:
                             description: 'If the current user was successfully logged out.'
-                        '500': {$ref: '#/components/responses/InternalServerError'}
+                        500: {$ref: '#/components/responses/InternalServerError'}
 
         components:
             securitySchemes:
@@ -82,6 +158,12 @@ nelmio_api_doc:
                         application/json:
                             schema: {$ref: '#/components/schemas/ErrorResponse'}
 
+                Forbidden:
+                    description: 'If the operation is forbidden for the current user.'
+                    content:
+                        application/json:
+                            schema: {$ref: '#/components/schemas/ErrorResponse'}
+
                 InternalServerError:
                     description: 'If an internal error occurred.'
                     content:
@@ -89,6 +171,19 @@ nelmio_api_doc:
                             schema: {$ref: '#/components/schemas/ErrorResponse'}
 
             schemas:
+                NoteRequest:
+                    type: object
+                    properties:
+                        name: {type: string}
+                        content: {type: string}
+
+                NoteResponse:
+                    type: object
+                    properties:
+                        id: {type: integer}
+                        name: {type: string}
+                        content: {type: string}
+
                 UserResponse:
                     type: object
                     properties:
