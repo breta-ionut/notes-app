@@ -1,5 +1,6 @@
 fos_rest:
-    body_converter: true
+    body_converter:
+        validate: true
     zone:
         - {path: ^/api(?!/doc$)}
     view:
