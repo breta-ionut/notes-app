@@ -24,9 +24,18 @@ export default {
 
     getters: {
         /**
+         * @return {boolean}
+         */
+        areLoaded: state => !!state.notes,
+
+        /**
          * @return {Note[]}
          */
-        all: state => state.notes.all(),
+        all: state => {
+            ensureNotesAreLoaded(state)
+
+            return state.notes.all()
+        },
     },
 
     mutations: {
