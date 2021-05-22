@@ -1,10 +1,10 @@
 import {mapGetters} from 'vuex'
 
-import NoteModal from './NoteModal.vue'
+import EditNoteModal from './EditNoteModal.vue'
 import Note from '../models/Note.js'
 
 export default {
-    components: {NoteModal},
+    components: {EditNoteModal},
 
     data: () => ({
         /**

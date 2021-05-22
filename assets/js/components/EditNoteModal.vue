@@ -1,4 +1,4 @@
-<script src="./NoteModal.js"></script>
+<script src="./EditNoteModal.js"></script>
 
 <template>
     <div class="modal fade show" tabindex="-1" aria-labelledby="note-modal-label" aria-modal="true" role="dialog" style="display: block">

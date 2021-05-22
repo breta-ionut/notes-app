@@ -28,7 +28,7 @@
         </div>
 
         <slot v-if="currentNote">
-            <NoteModal :note="currentNote" @close="reset" />
+            <EditNoteModal :note="currentNote" @close="reset" />
         </slot>
 
         <button class="btn btn-primary" @click="add">Add</button>
