@@ -16,8 +16,9 @@
                     <td>{{ truncate(note.getName(), 25) }}</td>
                     <td>{{ truncate(note.getContent(), 50) }}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" @click="edit(note)">Edit</button>
-                        <button class="btn btn-sm btn-danger" @click="remove(note)">Delete</button>
+                        <button class="btn btn-sm btn-primary mx-2" @click="edit(note)">Edit</button>
+                        <button class="btn btn-sm btn-danger mx-2" @click="remove(note)">Delete</button>
+                        <button class="btn btn-sm btn-success mx-2" @click="view(note)">View</button>
                     </td>
                 </tr>
             </tbody>
@@ -27,10 +28,14 @@
             You don't have any notes added.
         </div>
 
-        <slot v-if="currentNote">
-            <EditNoteModal :note="currentNote" @close="reset" />
+        <button class="btn btn-primary" @click="add">Add</button>
+
+        <slot v-if="currentlyEditedNote">
+            <EditNoteModal :note="currentlyEditedNote" @close="reset" />
         </slot>
 
-        <button class="btn btn-primary" @click="add">Add</button>
+        <slot v-if="currentlyViewedNote">
+            <ViewNoteModal :note="currentlyViewedNote" @close="reset" />
+        </slot>
     </div>
 </template>

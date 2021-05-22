@@ -1,16 +1,22 @@
 import {mapGetters} from 'vuex'
 
 import EditNoteModal from './EditNoteModal.vue'
+import ViewNoteModal from './ViewNoteModal.vue'
 import Note from '../models/Note.js'
 
 export default {
-    components: {EditNoteModal},
+    components: {EditNoteModal, ViewNoteModal},
 
     data: () => ({
         /**
          * @type {Note|null}
          */
-        currentNote: null,
+        currentlyEditedNote: null,
+
+        /**
+         * @type {Note|null}
+         */
+        currentlyViewedNote: null,
     }),
 
     computed: mapGetters('note', {
@@ -34,14 +40,14 @@ export default {
         },
 
         add() {
-            this.currentNote = new Note()
+            this.currentlyEditedNote = new Note()
         },
 
         /**
          * @param {Note} note
          */
         edit(note) {
-            this.currentNote = note.clone()
+            this.currentlyEditedNote = note.clone()
         },
 
         /**
@@ -61,8 +67,15 @@ export default {
             }
         },
 
+        /**
+         * @param {Note} note
+         */
+        view(note) {
+            this.currentlyViewedNote = note
+        },
+
         reset() {
-            this.currentNote = null
+            this.currentlyEditedNote = this.currentlyViewedNote = null
         },
     },
 }
