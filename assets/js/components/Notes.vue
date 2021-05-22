@@ -15,12 +15,18 @@
                 <tr>
                     <td>{{ note.getName() }}</td>
                     <td>{{ note.getContent() }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" @click="edit(note)">Edit</button>
+                        <button class="btn btn-sm btn-danger" @click="remove(note)">Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </div>
 
-    <slot v-if="currentNote">
-        <NoteModal :note="currentNote" />
-    </slot>
+        <slot v-if="currentNote">
+            <NoteModal :note="currentNote" @close="reset" />
+        </slot>
+
+        <button class="btn btn-primary" @click="add">Add</button>
+    </div>
 </template>

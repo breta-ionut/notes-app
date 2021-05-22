@@ -45,10 +45,14 @@ export default {
             }
 
             try {
-                await this.$store.dispatch('note/remove', note)
+                await this.$store.dispatch('note/delete', note)
             } catch (error) {
                 alert('Error occurred while trying to remove the note. Please refresh the page or try again later.')
             }
+        },
+
+        reset() {
+            this.currentNote = null
         },
     },
 }

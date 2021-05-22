@@ -29,7 +29,7 @@ export default {
      * @param {Note} note
      */
     async delete(note) {
-        await axios.delete('/note' + note.getId())
+        await axios.delete('/note/' + note.getId())
     },
 
     /**
