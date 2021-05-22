@@ -18,7 +18,7 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
 
-                            <input type="text" name="name" id="name" class="form-control" :class="{'border-danger': errors.fields.name}" required maxlength="100" v-model="dirtyNote.name" />
+                            <input type="text" name="name" id="name" class="form-control" :class="{'border-danger': errors.fields.name}" required maxlength="100" v-model="note.name" />
 
                             <p class="form-text text-danger" v-for="error in errors.fields.name">{{ error }}</p>
                         </div>
@@ -26,7 +26,7 @@
                         <div class="mb-3">
                             <label for="content" class="form-label">Content</label>
 
-                            <textarea name="content" id="content" class="form-control" :class="{'border-danger': errors.fields.content}" required maxlength="1023" v-model="dirtyNote.content" />
+                            <textarea name="content" id="content" class="form-control" :class="{'border-danger': errors.fields.content}" required maxlength="1023" v-model="note.content" />
 
                             <p class="form-text text-danger" v-for="error in errors.fields.content">{{ error }}</p>
                         </div>
