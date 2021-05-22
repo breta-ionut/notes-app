@@ -33,6 +33,7 @@ class Token implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity="App\User\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private User $user;
 

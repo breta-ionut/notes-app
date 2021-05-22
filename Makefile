@@ -42,7 +42,7 @@ generate-migration:
 		docker-compose exec php bin/console d:m:diff
 
 migrate:
-		docker-compose exec php bin/console d:m:m
+		docker-compose exec php bin/console d:m:m -n
 
 user-register:
 		docker-compose exec php bin/console app:user:register $(filter-out $@,$(MAKECMDGOALS))

@@ -8,6 +8,13 @@ doctrine:
         auto_mapping: true
 
         mappings:
+            Note:
+                type: annotation
+                dir: '%kernel.project_dir%/src/Note/Entity'
+                alias: Note
+                prefix: App\Note\Entity
+                is_bundle: false
+
             User:
                 type: annotation
                 dir: '%kernel.project_dir%/src/User/Entity'
