@@ -8,9 +8,11 @@ note:
     type: annotation
     prefix: /api/note
     name_prefix: app_note_
+    trailing_slash_on_root: false
 
 user:
     resource: ../../src/User/Controller
     type: annotation
     prefix: /api/user
     name_prefix: app_user_
+    trailing_slash_on_root: false
