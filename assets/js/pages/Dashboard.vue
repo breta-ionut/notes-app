@@ -2,4 +2,6 @@
 
 <template>
     <Navbar />
+
+    <Notes />
 </template>

@@ -36,7 +36,7 @@ export default {
      * @return {Promise<NoteCollection>}
      */
     async list() {
-        let response = axios.get('/note')
+        let response = await axios.get('/note')
 
         return NoteCollection.fromApiResponseData(response.data)
     },
