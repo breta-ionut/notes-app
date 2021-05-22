@@ -1,7 +1,6 @@
 frontend:
     resource: ../../src/Frontend/Controller
     type: annotation
-    prefix: /
     name_prefix: app_frontend_
 
 note:

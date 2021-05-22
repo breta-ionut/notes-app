@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route(path: '{path<^(?!api/).*?>}', name: 'index')]
+    #[Route(path: '/{path<^(?!api/).*?>}', name: 'index', priority: -1000)]
     public function index(): Response
     {
         return $this->render('frontend/index.html.twig');

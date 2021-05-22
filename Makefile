@@ -38,6 +38,9 @@ clean-hard:
 enter-back:
 		docker-compose exec php bash
 
+clear-cache:
+		docker-compose exec php bin/console c:c
+
 generate-migration:
 		docker-compose exec php bin/console d:m:diff
 
