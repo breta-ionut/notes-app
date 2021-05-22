@@ -11,10 +11,10 @@
 
                 <div class="modal-body">
                     <h6>Name:</h6>
-                    <p>{{ note.getName() }}</p>
+                    <p class="text-break">{{ note.getName() }}</p>
 
                     <h6>Content:</h6>
-                    <p>{{ note.getContent() }}</p>
+                    <p class="text-break">{{ note.getContent() }}</p>
                 </div>
             </div>
         </div>
